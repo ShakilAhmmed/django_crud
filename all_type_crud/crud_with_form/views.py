@@ -15,7 +15,8 @@ def django_form(request):
             return HttpResponseRedirect(reverse('django_form'))
     else:    
         form=CrudForm()
-    return render(request,'dashboard/crud_with_django_form.html',{'form':form,'data':data})
+        action_type='Create'
+    return render(request,'dashboard/crud_with_django_form.html',{'form':form,'data':data,'action_type':action_type})
 
 def status(request,pk):
     data=CrudWithForm.objects.get(pk=pk)
@@ -39,7 +40,8 @@ def edit(request,pk):
             return HttpResponseRedirect(reverse('django_form'))
      else:    
         form=CrudForm(instance=edit_data)
-     return render(request,'dashboard/crud_with_django_form.html',{'form':form,'data':data})   
+        action_type='Update'
+     return render(request,'dashboard/crud_with_django_form.html',{'form':form,'data':data,'action_type':action_type})   
 
 def delete(request,pk):
     data=CrudWithForm.objects.get(pk=pk).delete()
