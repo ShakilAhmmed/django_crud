@@ -26,7 +26,7 @@ How to Use.
 
 ### Installation
 
-Dillinger requires [python](https://www.python.org/) v3.6+ to run.
+requires [python](https://www.python.org/) v3.6+ to run.
 
 Install the dependencies and devDependencies and start the server.
 

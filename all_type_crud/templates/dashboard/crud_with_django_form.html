@@ -1,0 +1,150 @@
+{% extends 'dashboard/dashboard.html'%}
+{% block maincontent %}
+<div id="content-wrapper">
+
+    <div class="container-fluid">
+
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Overview</li>
+      </ol>
+
+      {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} text-center">
+            {{message}}
+        </div>
+        {% endfor %}
+    {% endif %}
+
+
+
+
+      <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#exampleModal">
+        Create New Category
+      </button>
+   
+      
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Create Category</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+            <!-- {{form}} -->
+            <form action="" method="POST">
+              {% csrf_token %}
+                <div class="form-group">
+                  <label for="{{form.category_name.id_for_label}}">{{form.category_name.label}}</label>
+                    {{form.category_name}}
+                    <div class="text-danger">{{ form.category_name.errors }}</div> 
+                    
+                </div>
+
+                <div class="form-group">
+                    <label for="{{form.category_code.id_for_label}}">{{form.category_code.label}}</label>
+                   {{form.category_code}}
+                   <div class="text-danger">{{form.category_code.errors}}</div>
+                </div>
+      
+                <div class="form-group">
+                  <label for="{{form.category_description.id_for_label}}">{{form.category_description.label}}</label>
+                  {{form.category_description}}
+                  <div class="text-danger">{{form.category_description.errors}}</div>
+                
+                </div>
+      
+                <div class="form-group">
+                  <label for="{{form.category_status.id_for_label}}">{{form.category_status.label}}</label>
+                  {{form.category_status}}
+                  <div class="text-danger">{{form.category_status.errors}}</div>   
+                </div>
+      
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <button type="submit" name="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card mb-3 mt-5">
+        <div class="card-header">
+          <i class="fas fa-table"></i>
+          Data Table Example</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Sl No</th>
+                  <th>Category</th>
+                  <th>Category Code</th>
+                  <th>Category Description</th>
+                  <th>Category Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                    <th>Sl No</th>
+                    <th>Category</th>
+                    <th>Category Code</th>
+                    <th>Category Description</th>
+                    <th>Category Status</th>
+                    <th>Action</th>
+                </tr>
+              </tfoot>
+              <tbody>
+                  {% for data_value in  data %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{data_value.category_name}}</td>
+                  <td>{{data_value.category_code}}</td>
+                  <td>{{data_value.category_description}}</td>
+                  <td>
+                      {% if data_value.category_status == 'Active' %}
+                      <span style="color:green"><i class="fa fa-check-circle"></i>&nbsp;{{data_value.category_status}}</span>
+                      {% else %}
+                      <span style="color:red"><i class="fa fa-times-circle"></i>&nbsp;{{data_value.category_status}}</span>
+                      {% endif %}
+                    </td>
+                  <td>
+                    <a href="{% url 'delete' data_value.pk %}" onclick="return confirm('Are You Sure?')">
+                            <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    </a>
+                    <a href="{% url 'edit' data_value.pk %}">
+                        <button class="btn btn-info"><i class="fas fa-pencil-alt"></i></button>
+                    </a>
+                    <a href="{% url 'status' data_value.pk %}">
+                        {% if data_value.category_status == 'Active' %}
+                        <button class="btn btn-warning"><i class="fa fa-times-circle"></i></button>
+                        {% else %}
+                            <button class="btn btn-success"><i class="fa fa-check-circle"></i></button>
+                        {% endif %}
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>
+
+    <!-- /.container-fluid -->
+{% endblock maincontent %}
+    <!-- Sticky Footer -->
