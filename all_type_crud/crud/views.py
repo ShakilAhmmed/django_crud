@@ -14,6 +14,7 @@ def simple_crud(request):
     errors={}
     success={}
     value={}
+    category_data=SimpleCrud.objects.all()
     if request.method == 'POST':
         category_name=request.POST.get('category_name',None)
         category_code=request.POST.get('category_code',None)
@@ -34,12 +35,12 @@ def simple_crud(request):
             except IntegrityError:
                 errors['exist']='Already Exist'
                 value={}
-        return render(request,'dashboard/simple_crud.html',{'errors':errors,'success':success,'value':value})     
+        return render(request,'dashboard/simple_crud.html',{'errors':errors,'success':success,'value':value,'category_data':category_data})     
     else:
         context={
-            'category_data':SimpleCrud.objects.all()
+            'category_data':category_data
         }    
-        return render(request,'dashboard/simple_crud.html',context)  
+    return render(request,'dashboard/simple_crud.html',context)  
 
 def delete(request,pk):
     success={}

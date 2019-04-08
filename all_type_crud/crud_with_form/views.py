@@ -6,6 +6,7 @@ from .models import CrudWithForm
 from django.contrib import messages
 # Create your views here.
 def django_form(request):
+    last_created=CrudWithForm.objects.order_by('-updated_at')[:1]
     data=CrudWithForm.objects.all()
     if request.method == 'POST':
         form=CrudForm(request.POST)
@@ -16,7 +17,7 @@ def django_form(request):
     else:    
         form=CrudForm()
         action_type='Create'
-    return render(request,'dashboard/crud_with_django_form.html',{'form':form,'data':data,'action_type':action_type})
+    return render(request,'dashboard/crud_with_django_form.html',{'form':form,'data':data,'action_type':action_type,'last_created':last_created})
 
 def status(request,pk):
     data=CrudWithForm.objects.get(pk=pk)
