@@ -13,7 +13,7 @@
       </ol>
 
       {% if success %}
-      <div class="alert alert-success">
+      <div class="alert alert-success text-center">
           {{success.success}}
       </div>
     {% endif %}
@@ -127,14 +127,14 @@
                   </td>
                   <td>
 
-                    <a href="{% url 'delete' category_data_value.pk %}" onclick="return confirm('Are You Sure?')">
+                    <a href="{% url 'simple_delete' category_data_value.pk %}" onclick="return confirm('Are You Sure?')">
                       <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
                     </a>
 
-                    <a href="{% url 'edit' category_data_value.pk  %}">
+                    <a href="{% url 'simple_edit' category_data_value.pk  %}">
                         <button class="btn btn-info"><i class="fas fa-pencil-alt"></i></button>
                     </a>
-                    <a href="{% url 'status' category_data_value.pk  %}">
+                    <a href="{% url 'simple_status' category_data_value.pk  %}">
                       {% if category_data_value.category_status == 'Active' %}
                           <button class="btn btn-warning"><i class="fa fa-times-circle"></i></button>
                       {% else %}

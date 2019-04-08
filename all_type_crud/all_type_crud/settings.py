@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',
     'crud.apps.CrudConfig',
-    'crud_with_form.apps.CrudWithFormConfig'
+    'crud_with_form.apps.CrudWithFormConfig',
+    'django_tweaks_crud.apps.DjangoTweaksCrudConfig'
 ]
 
 MIDDLEWARE = [

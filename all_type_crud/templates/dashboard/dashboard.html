@@ -102,11 +102,20 @@
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Simple Crud</span></a>
       </li>
+
       <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
-      </li>
+          <a class="nav-link" href="{% url 'django_form' %}">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Form Crud</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'django_tweaks_form' %}">
+              <i class="fas fa-fw fa-chart-area"></i>
+              <span>Tweaks Crud</span></a>
+          </li>
+
+
     </ul>
 
     {% block maincontent %}
