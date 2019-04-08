@@ -19,5 +19,6 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('crud.urls')),
-    path('dashboard/django_form',include('crud_with_form.urls'))
+    path('dashboard/django_form/',include('crud_with_form.urls')),
+    path('dashboard/django_tweaks_crud/',include('django_tweaks_crud.urls')),
 ]
