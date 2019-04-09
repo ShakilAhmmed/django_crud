@@ -1,8 +1,10 @@
+.vscode
+venv
+
+
 # Created by https://www.gitignore.io
 
 ### OSX ###
-.vscode
-venv
 
 .DS_Store
 .AppleDouble
